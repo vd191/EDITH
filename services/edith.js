@@ -6,6 +6,7 @@ const binance = new Binance().options({
 
 module.exports.index = async (req, res) => {
   const data = req.body;
+	console.log(data)
   const currentPosition = await getCurrentPosition();
   if (currentPosition) closeCurrentOrder(currentPosition);
 
