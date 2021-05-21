@@ -5,7 +5,8 @@ const binance = new Binance().options({
 });
 
 module.exports.index = async (req, res) => {
-  const data = req.body;
+  const data = await req.body;
+	console.log("Signal Received")
 	console.log(data)
   const currentPosition = await getCurrentPosition();
   if (currentPosition) closeCurrentOrder(currentPosition);
@@ -16,7 +17,7 @@ module.exports.index = async (req, res) => {
 };
 
 const getCurrentPosition = async (data) => {
-  console.log("check Current Order");
+  console.log("Checking current position");
   const positions = await binance.futuresPositionRisk();
   const currentPositions = positions.filter((object) => object.entryPrice > 0);
   console.log(currentPositions);
@@ -25,6 +26,7 @@ const getCurrentPosition = async (data) => {
 };
 
 const closeCurrentOrder = async (data) => {
+	console.log("Closing current position");
   let result = true;
   if (data.positionAmt < 0) {
     result = await binance.futuresMarketBuy(
@@ -41,7 +43,7 @@ const closeCurrentOrder = async (data) => {
 };
 
 const placeNewOrder = async (data) => {
-  console.log("Place new order");
+  console.log("Placing new order");
   console.log(data);
   let result = false;
   if (data.side === "buy") {
