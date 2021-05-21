@@ -6,14 +6,14 @@ const binance = new Binance().options({
 
 module.exports.index = async (req, res) => {
   const data = await req.body;
-	console.log("Signal Received")
-	console.log(data)
+  console.log("Signal Received");
+  console.log(data);
   const currentPosition = await getCurrentPosition();
   if (currentPosition) closeCurrentOrder(currentPosition);
 
   result = await placeNewOrder(data);
-  console.log(result);
-	res.send("OK");
+  console.log("DONE");
+  res.send("OK");
 };
 
 const getCurrentPosition = async (data) => {
@@ -26,7 +26,7 @@ const getCurrentPosition = async (data) => {
 };
 
 const closeCurrentOrder = async (data) => {
-	console.log("Closing current position");
+  console.log("Closing current position");
   let result = true;
   if (data.positionAmt < 0) {
     result = await binance.futuresMarketBuy(
@@ -39,6 +39,7 @@ const closeCurrentOrder = async (data) => {
   }
 
   if ((result.length = 0)) return;
+  console.log("Finished close order");
   return true;
 };
 
