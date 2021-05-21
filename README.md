@@ -1,0 +1,2 @@
+# EDITH
+ TRADING BOT
