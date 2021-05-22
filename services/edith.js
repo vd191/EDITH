@@ -43,7 +43,7 @@ const closeCurrentOrder = async (data) => {
   return true;
 };
 
-const placeNewOrder = async () => {
+const placeNewOrder = async (data) => {
   console.log("Placing new order");
   console.log(data);
   let result = false;
