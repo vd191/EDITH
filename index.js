@@ -1,6 +1,5 @@
 require("dotenv").config();
 const express = require("express");
-const bodyParser = require("body-parser");
 const edith = require("./services/edith");
 const app = express();
 const port = process.env.PORT || 3000;
