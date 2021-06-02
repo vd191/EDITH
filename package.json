@@ -19,11 +19,14 @@
   },
   "homepage": "https://github.com/vdn19/EDITH#readme",
   "dependencies": {
+    "axios": "^0.21.1",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "dotenv": "^9.0.2",
     "express": "^4.17.1",
+    "moment": "^2.29.1",
     "node-binance-api": "^0.12.5",
+    "node-schedule": "^2.0.0",
     "nodemon": "^2.0.7"
   }
 }
