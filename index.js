@@ -7,7 +7,7 @@ const edith = require("./services/edith");
 const app = express();
 const port = process.env.PORT || 3000;
 
-const j = schedule.scheduleJob('20 * * * *', function () {
+const j = schedule.scheduleJob('* 7 * * *', function () {
   console.log("Report balance");
   davinci.reportBalance();
 });
