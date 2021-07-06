@@ -14,7 +14,7 @@ module.exports.reportBalance = async (req, res) => {
   const profit =
     parseInt(balance[0].crossWalletBalance) + parseInt(balance[0].crossUnPnl);
   // const message = `${date}: $${Math.round(profit)}`;
-  const message = `Floating balance today: $${Math.round(profit)}`;
+  const message = `FLOATING BALANCE: $${Math.round(profit)}`;
   console.log(message);
   const url = `https://api.telegram.org/bot${process.env.TELE_TOKEN}/sendMessage?chat_id=@${teleUsername}&text=${message}`;
   await axios.get(url);
