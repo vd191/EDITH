@@ -7,7 +7,7 @@ const edith = require("./services/edith");
 const app = express();
 const port = process.env.PORT || 3000;
 
-const j = schedule.scheduleJob('0 19 * * *', function () {
+const j = schedule.scheduleJob("0 19 * * *", function () {
   console.log("Report balance");
   davinci.reportBalance();
 });
@@ -21,6 +21,9 @@ app.get("/", (req, res) => {
 });
 
 app.post("/edith", edith.index);
+
+app.get("/testFunction", edith.testFunction);
+app.get("/testReport", davinci.reportBalance);
 
 app.listen(port, () => {
   console.log(`http://localhost:${port}`);

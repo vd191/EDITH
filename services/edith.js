@@ -4,6 +4,18 @@ const binance = new Binance().options({
   APISECRET: process.env.SECRET_KEY,
 });
 
+module.exports.testFunction = async (req, res) => {
+  console.log("test");
+  const accounts = await binance.futuresBalance();
+  const balance = await accounts.filter((item) => item.asset === "USDT");
+  console.log(balance);
+  console.log(parseInt(balance[0].balance), parseInt(balance[0].crossUnPnl));
+
+  const profit = parseInt(balance[0].balance) + parseInt(balance[0].crossUnPnl);
+
+  console.log(Math.round(profit));
+};
+
 module.exports.index = async (req, res) => {
   const data = await req.body;
   console.log("Signal Received");
