@@ -18,9 +18,10 @@ module.exports.testFunction = async (req, res) => {
 
 module.exports.index = async (req, res) => {
   const data = await req.body;
-  console.log("Signal Received");
-  console.log(data);
+  console.log("Signal Received", data);
+  // Check any current positions
   const currentPosition = await getCurrentPosition();
+  // If there are any current position then close it first.
   if (currentPosition) closeCurrentOrder(currentPosition);
 
   result = await placeNewOrder(data);
@@ -37,6 +38,7 @@ const getCurrentPosition = async () => {
   return false;
 };
 
+// CLOSE the current position with CORRECT POSITION AMOUNT
 const closeCurrentOrder = async (data) => {
   console.log("Closing current position");
   let result = true;

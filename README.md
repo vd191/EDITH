@@ -2,6 +2,8 @@
 
 TRADING BOT
 
+http://edith-project.herokuapp.com/edith
+
 { 
     "symbol":"BTCSDT", 
     "quantity":0.001, 
