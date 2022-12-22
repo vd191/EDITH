@@ -9,10 +9,9 @@ module.exports.index = async (req, res) => {
   console.log(
     `RECEIVED REQUEST: ${data.quantity} ${data.symbol} @ market price`
   );
-  let isClosed = false;
   const currentPosition = await getCurrentPosition();
 
-  if (currentPosition) isClosed = closeCurrentOrder(currentPosition);
+  if (currentPosition) closeCurrentOrder(currentPosition);
   await placeNewOrder(data);
   res.send("OK");
 };
