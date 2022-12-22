@@ -6,8 +6,9 @@ const binance = new Binance().options({
 
 module.exports.index = async (req, res) => {
   const data = await req.body;
+
   console.log(
-    `RECEIVED REQUEST: ${data.quantity} ${data.symbol} @ market price`
+    `RECEIVED REQUEST:${data.side} ${data.quantity} ${data.symbol} @ market price`
   );
   const currentPosition = await getCurrentPosition();
 
@@ -18,7 +19,6 @@ module.exports.index = async (req, res) => {
 
 const getCurrentPosition = async () => {
   const positions = await binance.futuresPositionRisk();
-  console.log("CURRENT POSITION",positions)
   const currentPositions = positions.filter((object) => object.entryPrice > 0);
   if ((currentPositions.length = 1)) return currentPositions[0];
   return false;
