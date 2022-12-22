@@ -11,5 +11,11 @@ http://edith-project.herokuapp.com/edith
     "message": "BUY THEM ALL" 
 }
 
+
 webhook
-{"symbol":"ETHUSDT", "quantity":{{strategy.order.contracts}}, "side": {{strategy.order.action}}}
+https://edith.herokuapp.com/edith
+{
+	"symbol": "ETHUSDT",
+	"quantity": "{{strategy.order.contracts}}",
+	"side": "{{strategy.order.action}}"
+}
