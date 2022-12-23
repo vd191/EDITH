@@ -45,16 +45,10 @@ const placeNewOrder = async (data) => {
   console.log("Placing new order", data);
   let result = false;
   if (data.side === "buy") {
-    result = await binance.futuresMarketBuy(
-      data.symbol,
-      parseFloat(data.quantity)
-    );
+    result = await binance.futuresMarketBuy(data.symbol, data.quantity);
   }
   if (data.side === "sell") {
-    result = await binance.futuresMarketSell(
-      data.symbol,
-      parseFloat(data.quantity)
-    );
+    result = await binance.futuresMarketSell(data.symbol, data.quantity);
   }
   console.log(
     `PLACED NEW ORDER: ${result.origQty} ${result.symbol} @ ${result.type}`
