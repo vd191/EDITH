@@ -42,16 +42,15 @@ const closeCurrentOrder = async (data) => {
 };
 
 const placeNewOrder = async (data) => {
-  console.log("Placing new order", data);
   let result = false;
   if (data.side === "buy") {
+    console.log("PLACING NEW BUY ORDER", data);
     result = await binance.futuresMarketBuy(data.symbol, data.quantity);
   }
   if (data.side === "sell") {
+    console.log("PLACING NEW SELL ORDER", data);
     result = await binance.futuresMarketSell(data.symbol, data.quantity);
   }
-  console.log(
-    `PLACED NEW ORDER: ${result.origQty} ${result.symbol} @ ${result.type}`
-  );
+  console.log(`PLACED NEW ORDER:`, result);
   return result;
 };
