@@ -6,7 +6,7 @@ const binance = new Binance().options({
 
 module.exports.index = async (req, res) => {
   const data = await req.body;
-
+  console.log(data);
   console.log(
     `RECEIVED REQUEST:${data.side} ${data.quantity} ${data.symbol} @ market price`
   );
