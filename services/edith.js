@@ -13,7 +13,7 @@ module.exports.index = async (req, res) => {
   const currentPosition = await getCurrentPosition();
 
   if (currentPosition) closeCurrentOrder(currentPosition);
-  await placeNewOrder(data);
+  await placeNewOrder({ quantity: parseInt(data.quantity), ...data });
   res.send("OK");
 };
 
@@ -38,6 +38,7 @@ const closeCurrentOrder = async (data) => {
   if (data.positionAmt > 0) {
     result = await binance.futuresMarketSell(data.symbol, data.positionAmt);
   }
+  console.log(result);
   console.log(
     `CLOSED ORDER: ${result.origQty} ${result.symbol} @ ${result.type}`
   );
@@ -46,15 +47,16 @@ const closeCurrentOrder = async (data) => {
 };
 
 const placeNewOrder = async (data) => {
+  console.log(data);
   let result = false;
   if (data.side === "buy") {
-    result = await binance.futuresMarketBuy(data.symbol, parseInt(data.quantity));
+    result = await binance.futuresMarketBuy(data.symbol, data.quantity);
   }
   if (data.side === "sell") {
-    result = await binance.futuresMarketSell(data.symbol, parseInt(data.quantity));
+    result = await binance.futuresMarketSell(data.symbol, data.quantity);
   }
   console.log(
-    `PLACED NEW ORDER: ${result.origQty} ${data.symbol} @ ${data.type}`
+    `PLACED NEW ORDER: ${result.origQty} ${result.symbol} @ ${result.type}`
   );
   return result;
 };
