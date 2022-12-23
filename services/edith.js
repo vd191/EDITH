@@ -10,7 +10,7 @@ module.exports.index = async (req, res) => {
   const currentPosition = await getCurrentPosition();
 
   if (currentPosition) closeCurrentOrder(currentPosition);
-  await placeNewOrder({ quantity: parseFloat(data.quantity), ...data });
+  await placeNewOrder(data);
   res.send("OK");
 };
 
@@ -45,10 +45,16 @@ const placeNewOrder = async (data) => {
   console.log("Placing new order", data);
   let result = false;
   if (data.side === "buy") {
-    result = await binance.futuresMarketBuy(data.symbol, data.quantity);
+    result = await binance.futuresMarketBuy(
+      data.symbol,
+      parseFloat(data.quantity)
+    );
   }
   if (data.side === "sell") {
-    result = await binance.futuresMarketSell(data.symbol, data.quantity);
+    result = await binance.futuresMarketSell(
+      data.symbol,
+      parseFloat(data.quantity)
+    );
   }
   console.log(
     `PLACED NEW ORDER: ${result.origQty} ${result.symbol} @ ${result.type}`
